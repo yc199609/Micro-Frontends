@@ -41,7 +41,10 @@
       </a-breadcrumb>
 
       <a-layout-content style="margin: 0 16px 24px 16px; padding: 24px;background: #fff">
-        Content
+        <div id="single-vue" class="single-spa-vue">
+          <div id="vue"></div>
+        </div>
+        <router-view :key="$route.path" />
       </a-layout-content>
     </a-layout>
   </a-layout>

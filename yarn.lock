@@ -7626,6 +7626,16 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
+single-spa-vue@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/single-spa-vue/-/single-spa-vue-1.7.0.tgz#3c813cf65771e0988771ca0308062723068a0fb2"
+  integrity sha512-ZuhObgu/ORn3aD3ctJtrBB0hqwgZb4aZ+zIujGQwz/bDe22xO9RSNNVlsCmyx5uVPdcxne4alje0h27Afn3rQw==
+
+single-spa@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/single-spa/-/single-spa-4.4.2.tgz#e1714d7baf15f2594bdc3d88ac8c24e62181a3be"
+  integrity sha512-p71heP0VPbocMHQnq5m02CRp/nOksb55nGrfaw8x1UVtJsryOGKE9PewtTC5fcSFAP790EKHKE1WmEq5VEfUgw==
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/slash/download/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -8106,6 +8116,11 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+systemjs@^6.1.9:
+  version "6.1.9"
+  resolved "https://registry.yarnpkg.com/systemjs/-/systemjs-6.1.9.tgz#17e5601867a9d1ee7a5dab71b050f38877d6992c"
+  integrity sha512-pmmYAaI/bk1RIPFIOrvP94DlvSyqZ5/BcAXTcUo0sKBqOc3rMuZaLsh1ofhxuIYgxzB/wDeCmG8i6RpmZj6yqA==
 
 table@^5.2.3:
   version "5.4.6"

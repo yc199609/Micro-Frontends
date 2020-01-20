@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { message } from 'ant-design-vue';
 import _ from 'lodash';
 
 /**
@@ -32,6 +33,24 @@ service.interceptors.request.use(
   config => config,
   (error) => {
     Promise.reject(error);
+  },
+);
+
+// response拦截器
+service.interceptors.response.use(
+  (response) => {
+    // 对响应数据做点什么
+    const res = response.data;
+    if (res.code !== 0) {
+      message.error(res.msg);
+      return Promise.reject(res.msg);
+    }
+    return res;
+  },
+  (error) => {
+    // 对响应错误做点什么
+    message.error(error.message);
+    return Promise.reject(error);
   },
 );
 

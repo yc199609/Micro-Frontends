@@ -1,0 +1,13 @@
+{
+  "userName":"yc",
+  "permissions":[
+    {
+      "path": "/device",
+      "name": "设备"
+    },
+    {
+      "path": "/department",
+      "name": "部门"
+    }
+  ]
+}

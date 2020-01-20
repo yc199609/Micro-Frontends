@@ -70,8 +70,6 @@
   </div>
 </template>
 <script>
-import request from '@/utils/request';
-
 export default {
   data: () => ({
     placeholder1: '请输入用户名',
@@ -85,12 +83,13 @@ export default {
       this.form.validateFields((err) => {
         if (!err) {
           const form = this.form.getFieldsValue();
-          this.$store.commit('SET_NAME', form.userName);
-          request.post('/213', form)
+          this.$store.dispatch('GetInfo', form)
             .then((res) => {
-              console.log(res);
+              const myRouter = res.map(item => ({ ...item, component: () => import('@/views/layout') }));
+              myRouter.push({ path: '*', redirect: '/404' });
+              this.$router.addRoutes(myRouter);
+              this.$router.push('/');
             });
-          // this.$router.push('/');
         }
       });
     },
@@ -167,18 +166,17 @@ export default {
   }
   .buttonbg {
     transition: all 0.5s;
-    /*! autoprefixer: off */
+    /* autoprefixer: ignore next */
     background: -webkit-linear-gradient(
-      right,
+      to right,
       #00dbde,
       #fc00ff,
       #00dbde,
       #fc00ff
     );
-    /* autoprefixer: on */
-    background: -moz-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
-    background: -o-linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
-    background: linear-gradient(right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: -moz-linear-gradient(to right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: -o-linear-gradient(to right, #00dbde, #fc00ff, #00dbde, #fc00ff);
+    background: linear-gradient(to right, #00dbde, #fc00ff, #00dbde, #fc00ff);
     top: 0;
     left: 0;
     height: 100%;
