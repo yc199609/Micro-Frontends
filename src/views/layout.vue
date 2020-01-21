@@ -6,24 +6,42 @@
       v-model="collapsed"
     >
       <div class="logo" />
+
       <a-menu
         theme="dark"
         mode="inline"
-        :defaultSelectedKeys="['1']"
+        @click="handleClickMenu"
+        :defaultSelectedKeys="activeMenu"
       >
-        <a-menu-item key="1">
-          <a-icon type="user" />
-          <span>nav 1</span>
+        <a-menu-item key="/home">
+          <a-icon type="home" />
+          <span>首页</span>
         </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span>nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span>nav 3</span>
-        </a-menu-item>
+
+        <template v-for="item in menusList">
+          <a-menu-item :key="item.path" v-if="!item.children">
+            <i class="iconfont menuIcon" v-html="item.meta.icon" />
+            <span>{{ item.name }}</span>
+          </a-menu-item>
+
+          <a-sub-menu v-else :key="item.path" >
+            <span slot="title">
+              <i class="iconfont menuIcon" v-html="item.meta.icon" />
+              <span>{{ item.name }}</span>
+            </span>
+            <a-menu-item
+              v-for="sub_item in item.children"
+              :key="sub_item.path"
+              >
+                <i class="iconfont menuIcon" v-html="sub_item.meta.icon" />
+                <span>{{ sub_item.name }}</span>
+            </a-menu-item>
+          </a-sub-menu>
+
+        </template>
+
       </a-menu>
+
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
@@ -34,13 +52,7 @@
         />
       </a-layout-header>
 
-      <a-breadcrumb style="margin: 5px 0 5px 10px;">
-        <a-breadcrumb-item>Home</a-breadcrumb-item>
-        <a-breadcrumb-item>List</a-breadcrumb-item>
-        <a-breadcrumb-item>App</a-breadcrumb-item>
-      </a-breadcrumb>
-
-      <a-layout-content style="margin: 0 16px 24px 16px; padding: 24px;background: #fff">
+      <a-layout-content style="margin: 24px 16px 24px 16px; padding: 24px;background: #fff">
         <div id="single-vue" class="single-spa-vue">
           <div id="vue"></div>
         </div>
@@ -54,10 +66,25 @@ export default {
   data() {
     return {
       collapsed: false,
+      menusList: [],
     };
   },
+  computed: {
+    activeMenu() {
+      return ['/home'];
+    },
+  },
+  created() {
+    this.menusList = this.$store.state.user.permissions;
+    console.log(this.$route);
+  },
   mounted() {
-    this.$store.commit('SET_NAME', 'sds');
+  },
+  methods: {
+    handleClickMenu(e) {
+      const route = e.keyPath.reverse().join('/');
+      this.$router.push(route);
+    },
   },
 };
 </script>
@@ -81,5 +108,9 @@ export default {
   height: 32px;
   background: rgba(255, 255, 255, 0.2);
   margin: 16px;
+}
+.menuIcon{
+  margin-right:10px;
+  font-size:14px;
 }
 </style>
